@@ -117,3 +117,11 @@ def compute_corpus_level_bleu_score(references, hypotheses) -> float:
                              [hyp for hyp in hypotheses])
 
     return bleu_score
+
+
+def compute_bleu_for_sentences( refer, hypo ):
+    references = []
+    for r in refer:
+        references.append( [ r ] )
+    bleu_score = corpus_bleu( references, hypo )
+    return bleu_score

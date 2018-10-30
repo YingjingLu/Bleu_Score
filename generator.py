@@ -91,3 +91,8 @@ def greedy_generator( in_file, out_file, vocab, secure_n_gram, replace_prob, rep
     in_f.close()
     out_f.close()
     return 0
+
+
+def naive_beam(  in_file, out_file, vocab, secure_n_gram, replace_prob, replace_with_top,
+                 insert_prob, insert_with_top, displacement_range, displacement_prob, beam_size = 5 ):
+    pass

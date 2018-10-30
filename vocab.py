@@ -1,8 +1,6 @@
 # code partially adopted https://github.com/artetxem.undreamt 
 # specifically we adopted his structure to separate special characters out in the vocab
 import collections 
-import torch
-import torch.nn as nn 
 import numpy as np 
 from collections import Counter
 from itertools import chain
