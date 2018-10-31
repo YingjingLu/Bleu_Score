@@ -37,12 +37,12 @@ def parse_arguments():
 
 if __name__ == '__main__':
     args = parse_arguments()
-    displacement_range = [ 1, args.displacement_range ]
+    # displacement_range = [ 1, args.displacement_rnge ]
     vocab = pickle.load( open( args.vocab, "rb" ) )
 
     if args.mode == "greedy":
         greedy_generator( args.in_file, args.out_file, vocab, args.n_gram, 
                           args.replace_prob, args.replace_top, args.insert_prob, args.insert_top,
-                        displacement_range, args.displacement_prob )
+                        args.displacement_range, args.displacement_prob )
         bleu_score = validate_output_file( args.out_file, args.in_file )
         print("Bleu Score: {}".format( bleu_score )  )

@@ -15,12 +15,12 @@ def greedy_generator_single_sentence( sentence, vocab, secure_n_gram, replace_pr
     cur_length = 0
     idx_array = []
 
-    replace_lst = np.arange( ( 1, replace_with_top ) )
-    replace_p = np.arange( ( replace_with_top, 1 ) )
+    replace_lst = np.arange( 1, replace_with_top )
+    replace_p = np.linspace( replace_with_top, 1 , num = replace_with_top - 1 )
     replace_p = replace_p / np.sum( replace_p )
     
-    insert_lst = np.arange( ( 1, insert_with_top ) )
-    insert_p = np.arange( ( insert_with_top, 1 ) )
+    insert_lst = np.arange( 1, insert_with_top )
+    insert_p = np.linspace( insert_with_top, 1 , num = insert_with_top - 1 )
     insert_p = insert_p / np.sum( insert_p )
     # break sentences into n_grams with top n gram being secure_n_gram
     while cur_length < length:
@@ -41,12 +41,14 @@ def greedy_generator_single_sentence( sentence, vocab, secure_n_gram, replace_pr
             ins = []
             for _ in range( insert_len ):
                 ins.append( np.random.choice( insert_lst, p = insert_p ) )
-            id_array[ l ] += ins 
+            idx_array[ l ] += ins 
     # randomly displace
     cur_len = 0
     ret = []
-    while cur_len < length:
+    while cur_len < len( idx_array ):
         displace_len = random.randint( 1, displacement_range )
+        while( displace_len + cur_len > len( idx_array ) ):
+            displace_len = random.randint( 1, displacement_range )
         add = idx_array[ cur_len: cur_len + displace_len ]
         if random.random() < displacement_prob:
             shuffle_idx = np.arange( displace_len, dtype = np.int )
@@ -88,6 +90,7 @@ def greedy_generator( in_file, out_file, vocab, secure_n_gram, replace_prob, rep
         out_f.write( res + "\n" )
 
         line = in_f.readline()
+        print( "done 1" )
     in_f.close()
     out_f.close()
     return 0
