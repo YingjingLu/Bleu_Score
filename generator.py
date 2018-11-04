@@ -90,7 +90,7 @@ def greedy_generator( in_file, out_file, vocab, secure_n_gram, replace_prob, rep
         out_f.write( res + "\n" )
 
         line = in_f.readline()
-        print( "done 1" )
+        # print( "done 1" )
     in_f.close()
     out_f.close()
     return 0
